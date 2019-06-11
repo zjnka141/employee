@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Form quản lý khách hàng</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+</head>
+<body>
+<div class="container p-4">
+    <h3 th:if="${edit}" class="text-danger">Chỉnh sửa nhân viên</h3>
+    <h3 th:unless="${edit}" class="text-danger">Thêm mới nhân viên</h3>
+    <form method="post" th:object="${employee}">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="id">Mã nhân viên</label>
+                <p th:if="${#fields.hasErrors('employeeCode')}" th:errors="*{employeeCode}" class="text-danger"></p>
+                <input th:if="${edit}" type="text" class="form-control" id="id" th:field="*{employeeCode}" disabled>
+                <input th:unless="${edit}" type="text" class="form-control" id="id" th:field="*{employeeCode}">
+            </div>
+            <div class="form-group">
+                <label for="group">Nhóm nhân viên</label>
+                <select name="group" class="form-control" id="group" th:field="*{employeeGroup}">
+                    <option value="Quản lý hệ thống">Quản lý hệ thống</option>
+                    <option value="Quản lý nhân sự">Quản lý nhân sự</option>
+                    <option value="Lễ tân">Lễ tân</option>
+                    <option value="Quản lý phòng">Quản lý phòng</option>
+                    <option value="Quản lý dịch vụ">Quản lý dịch vụ</option>
+
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="name">Họ tên</label>
+                <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></p>
+                <input type="text" class="form-control" id="name" th:field="*{name}">
+            </div>
+            <div class="form-group">
+                <label for="birthday">Ngày sinh</label>
+                <p th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}" class="text-danger"></p>
+                <input type="text" class="form-control" id="birthday" th:field="*{birthday}">
+            </div>
+            <div class="form-group">
+                <label for="birthday">Giới tính</label>
+                <label><input type="radio" name="gender" checked class="radio-inline" value="Nam" th:field="*{gender}">Nam</label>
+                <label><input type="radio" name="gender" class="radio-inline" value="Nữ" th:field="*{gender}">Nữ</label>
+                <p th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}" class="text-danger"></p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="phone">Số điện thoại</label>
+                <p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="text-danger"></p>
+                <input type="text" class="form-control" id="phone" th:field="*{phone}">
+            </div>
+            <div class="form-group">
+                <label for="cmnd">Số CMND</label>
+                <p th:if="${#fields.hasErrors('cmnd')}" th:errors="*{cmnd}" class="text-danger"></p>
+                <input type="text" class="form-control" id="cmnd" th:field="*{cmnd}">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></p>
+                <input type="text" class="form-control" id="email" th:field="*{email}">
+            </div>
+            <div class="form-group">
+                <label for="address">Địa chỉ</label>
+                <textarea class = "form-control" rows = "2" placeholder = "Địa chỉ..." id="address" th:field="*{address}"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <button th:if="${edit}" type="submit" class="btn btn-primary" style="float: right;"><i class="fas fa-check"></i> Cập nhật</button>
+    <button th:unless="${edit}" type="submit" class="btn btn-primary" style="float: right;"><i class="fas fa-check"></i> Thêm</button>
+    </form>
+
+</div>
+</body>
+</html>
